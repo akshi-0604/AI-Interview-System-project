@@ -1,7 +1,33 @@
-import Home from "./pages/candidate/Home";
+import Login from "./pages/candidate/Login";
 
 function App() {
-  return <Home />;
+  return <Login />;
 }
 
 export default App;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// import Home from "./pages/candidate/Home";
+
+// function App() {
+//   return <Home />;
+// }
+
+// export default App;
