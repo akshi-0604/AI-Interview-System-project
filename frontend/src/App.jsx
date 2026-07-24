@@ -1,33 +1,12 @@
-import Login from "./pages/candidate/Login";
+import { BrowserRouter } from "react-router-dom";
+import AppRoutes from "./routers/AppRoutes";
 
 function App() {
-  return <Login />;
+  return (
+    <BrowserRouter>
+      <AppRoutes />
+    </BrowserRouter>
+  );
 }
 
 export default App;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// import Home from "./pages/candidate/Home";
-
-// function App() {
-//   return <Home />;
-// }
-
-// export default App;

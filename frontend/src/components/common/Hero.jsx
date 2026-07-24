@@ -1,41 +1,46 @@
+import { useNavigate } from "react-router-dom";
 import Button from "./Button";
 
 function Hero() {
-    return (
-        <section className="min-h-[90vh] flex items-center justify-center bg-gradient-to-r from-blue-700 via-indigo-700 to-purple-700 text-white">
+  const navigate = useNavigate();
 
-            <div className="max-w-6xl mx-auto px-6 text-center">
+  return (
+    <section className="min-h-[90vh] flex items-center justify-center bg-gradient-to-r from-blue-700 via-indigo-700 to-purple-700 text-white">
 
-                <h1 className="text-5xl md:text-7xl font-bold leading-tight">
-                    AI-Powered
-                    <br />
-                    Interview Platform
-                </h1>
+      <div className="max-w-6xl mx-auto px-6 text-center">
 
-                <p className="mt-8 text-lg md:text-xl text-gray-200 max-w-3xl mx-auto leading-8">
-                    Revolutionize your hiring process with AI-driven interviews,
-                    intelligent resume analysis, live proctoring, adaptive questioning,
-                    and automated candidate evaluation.
-                </p>
+        <h1 className="text-5xl md:text-7xl font-bold leading-tight">
+          AI-Powered
+          <br />
+          Interview Platform
+        </h1>
 
-                <div className="mt-10 flex flex-col sm:flex-row justify-center gap-5">
+        <p className="mt-8 text-lg md:text-xl text-gray-200 max-w-3xl mx-auto leading-8">
+          Revolutionize your hiring process with AI-driven interviews,
+          intelligent resume analysis, live proctoring, adaptive questioning,
+          and automated candidate evaluation.
+        </p>
 
-                    <Button
-                        text="Start Interview"
-                        className="bg-blue-600 hover:bg-blue-700 text-white"
-                    />
+        <div className="mt-10 flex flex-col sm:flex-row justify-center gap-5">
 
-                    <Button
-                        text="Learn More"
-                        className="bg-white text-blue-700 hover:bg-gray-200"
-                    />
+          <Button
+            text="Start Interview"
+            onClick={() => navigate("/login")}
+            className="bg-blue-600 hover:bg-blue-700 text-white"
+          />
 
-                </div>
+          <Button
+            text="Learn More"
+            onClick={() => navigate("/")}
+            className="bg-white text-blue-700 hover:bg-gray-200"
+          />
 
-            </div>
+        </div>
 
-        </section>
-    );
+      </div>
+
+    </section>
+  );
 }
 
 export default Hero;
