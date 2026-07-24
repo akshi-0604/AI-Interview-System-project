@@ -1,4 +1,8 @@
-import ollama from "ollama";
+import Groq from "groq-sdk";
+
+const groq = new Groq({
+  apiKey: process.env.GROQ_API_KEY,
+});
 
 let conversationHistory = [];
 let resumeContext = "";
@@ -7,7 +11,6 @@ export const generateNextQuestion = async (
   previousQuestion,
   candidateAnswer
 ) => {
-
   conversationHistory.push({
     role: "assistant",
     content: previousQuestion,
@@ -18,10 +21,8 @@ export const generateNextQuestion = async (
     content: candidateAnswer,
   });
 
-  const systemPrompt = {
-  role: "system",
-  content: `
-You are an experienced HR interviewer.
+  const systemPrompt = `
+You are an experienced HR and Technical Interviewer.
 
 Candidate Resume:
 
@@ -29,31 +30,28 @@ ${resumeContext}
 
 Rules:
 
-1. Always use the resume while asking questions.
-
-2. Remember the entire conversation.
-
+1. Ask interview questions based on the resume.
+2. Remember the previous conversation.
 3. Never repeat a question.
+4. Ask only ONE question.
+5. If the answer is weak, ask a follow-up.
+6. Otherwise move to another resume topic.
+7. Return ONLY the next interview question.
+`;
 
-4. Ask deeper follow-up questions when necessary.
-
-5. If a topic is completed, move to another important skill from the resume.
-
-6. Ask only ONE interview question.
-
-7. Return ONLY the question.
-`,
-};
-
-  const response = await ollama.chat({
-    model: "llama3.2:3b",
+  const completion = await groq.chat.completions.create({
+    model: "llama-3.3-70b-versatile",
+    temperature: 0.6,
     messages: [
-      systemPrompt,
+      {
+        role: "system",
+        content: systemPrompt,
+      },
       ...conversationHistory,
     ],
   });
 
-  const nextQuestion = response.message.content;
+  const nextQuestion = completion.choices[0].message.content.trim();
 
   conversationHistory.push({
     role: "assistant",
@@ -66,6 +64,7 @@ Rules:
 export const clearConversation = () => {
   conversationHistory = [];
 };
+
 export const setResumeContext = (resumeText) => {
   resumeContext = resumeText;
 };

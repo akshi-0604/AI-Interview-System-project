@@ -1,11 +1,14 @@
-import axios from "axios";
+import Groq from "groq-sdk";
+
+const groq = new Groq({
+  apiKey: process.env.GROQ_API_KEY,
+});
 
 export const evaluateAnswer = async (question, answer) => {
-  try {
-    const prompt = `
-You are an AI technical interviewer.
+  const prompt = `
+You are an expert technical interviewer.
 
-Evaluate the candidate answer.
+Evaluate the candidate's answer.
 
 Question:
 ${question}
@@ -21,44 +24,44 @@ Return ONLY valid JSON.
   "strengths": "",
   "weaknesses": "",
   "improvement": "",
-  "confidence": 0
+  "confidence": "Low"
 }
 
-Score must be between 0 and 5.
-Confidence must be between 0 and 100.
+Rules:
+- Score must be between 0 and 5.
+- Do not return markdown.
+- Do not use \`\`\`json.
+- Return only the JSON object.
 `;
 
-    const response = await axios.post(
-      "http://localhost:11434/api/generate",
+  const completion = await groq.chat.completions.create({
+    model: "llama-3.3-70b-versatile",
+    temperature: 0.3,
+    messages: [
       {
-        model: "llama3.2:3b",
-        prompt,
-        stream: false,
-      }
-    );
+        role: "user",
+        content: prompt,
+      },
+    ],
+  });
 
-    let text = response.data.response;
+  let response = completion.choices[0].message.content.trim();
 
-    const start = text.indexOf("{");
-    const end = text.lastIndexOf("}");
+  // Remove markdown if present
+  response = response.replace(/```json/g, "").replace(/```/g, "").trim();
 
-    if (start !== -1 && end !== -1) {
-      text = text.substring(start, end + 1);
-    }
-
-    return JSON.parse(text);
-
+  try {
+    return JSON.parse(response);
   } catch (error) {
-
-    console.log(error);
+    console.log("Groq JSON Parse Error:", error);
 
     return {
       score: 0,
-      feedback: "Unable to evaluate answer.",
+      feedback: response,
       strengths: "",
       weaknesses: "",
       improvement: "",
-      confidence: 0,
+      confidence: "Unknown",
     };
   }
 };

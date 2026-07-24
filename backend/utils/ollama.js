@@ -1,27 +1,39 @@
-import axios from "axios";
+import Groq from "groq-sdk";
+
+const groq = new Groq({
+    apiKey: process.env.GROQ_API_KEY,
+});
 
 export const generateQuestions = async (resumeText) => {
     try {
-        const prompt = `
-You are an AI Interviewer.
+        const completion = await groq.chat.completions.create({
+            model: "llama-3.3-70b-versatile",
+            temperature: 0.5,
+            messages: [
+                {
+                    role: "system",
+                    content: `
+You are an AI Technical Interviewer.
 
-Based on the following resume, generate exactly 20 interview questions.
+Generate exactly 20 interview questions based ONLY on the candidate's resume.
 
-Resume:
-${resumeText}
-
-Return only the numbered questions.
-`;
-
-        const response = await axios.post("http://localhost:11434/api/generate", {
-            model: "llama3.2:3b",
-            prompt,
-            stream: false,
+Rules:
+1. Mix HR + Technical questions.
+2. Questions should become progressively harder.
+3. Return ONLY numbered questions.
+`,
+                },
+                {
+                    role: "user",
+                    content: resumeText,
+                },
+            ],
         });
 
-        return response.data.response;
+        return completion.choices[0].message.content;
     } catch (error) {
-        console.error("Ollama Error:", error.message);
-        return "Failed to generate questions.";
+        console.error("Groq Error:", error);
+
+        return "Failed to generate interview questions.";
     }
 };
