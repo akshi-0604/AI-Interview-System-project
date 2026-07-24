@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import API from "../../services/api";
 
-function RecentInterview() {
+function RecentInterView() {
   const [interviews, setInterviews] = useState([]);
   console.log("Current interviews:", interviews);
 
@@ -60,4 +60,4 @@ function RecentInterview() {
   );
 }
 
-export default RecentInterview;
+export default RecentInterView;
