@@ -1,13 +1,13 @@
 import React from "react";
 import { Routes, Route } from "react-router-dom";
 
-import Login from "../pages/Candidate/Login.jsx";
-import Register from "../pages/Candidate/Register.jsx";
-import Home from "../pages/Candidate/Home.jsx";
-import Dashboard from "../pages/Candidate/Dashboard.jsx";
-import ResumeUpload from "../pages/Candidate/ResumeUpload.jsx";
-import Interview from "../pages/Candidate/Interview";
-import Result from "../pages/Candidate/Result";
+import Login from "../pages/candidate/Login.jsx";
+import Register from "../pages/candidate/Register.jsx";
+import Home from "../pages/candidate/Home.jsx";
+import Dashboard from "../pages/candidate/Dashboard.jsx";
+import ResumeUpload from "../pages/candidate/ResumeUpload.jsx";
+import Interview from "../pages/candidate/Interview";
+import Result from "../pages/candidate/Result";
 import AdminDashboard from "../pages/admin/Dashboard";
 import InterviewDetails from "../pages/admin/InterviewDetails";
 
