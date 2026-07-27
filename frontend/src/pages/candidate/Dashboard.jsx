@@ -3,7 +3,7 @@ import API from "../../services/api";
 import Sidebar from "../../components/candidate/Sidebar";
 import Topbar from "../../components/candidate/Topbar";
 import DashboardCard from "../../components/candidate/DashboardCard";
-import RecentInterview from "../../components/candidate/RecentInterView";
+import RecentInterView from "../../components/candidate/RecentInterView";
 import ResumeUpload from "../../components/candidate/ResumeUpload";
 
 
