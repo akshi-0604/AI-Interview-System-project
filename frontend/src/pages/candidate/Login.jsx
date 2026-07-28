@@ -81,6 +81,18 @@ function Login() {
           >
             Login
           </button>
+          <div className="text-center mt-4">
+
+            <button
+              onClick={() => navigate("/forgot-password")}
+              className="text-blue-600 hover:underline"
+            >
+
+              Forgot Password?
+
+            </button>
+
+          </div>
         </form>
       </div>
     </div>

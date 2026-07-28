@@ -29,33 +29,38 @@ function Features() {
   ];
 
   return (
-    <section className="py-20 bg-gray-100">
+    <section
+  id="features"
+  className="py-20 bg-gray-100"
+>
       <div className="max-w-7xl mx-auto px-6">
 
-        <h2 className="text-4xl font-bold text-center mb-4">
-          Platform Features
-        </h2>
+        <h2 className="text-5xl font-bold text-center text-gray-800 mb-4">
+  Why Choose Our Platform?
+</h2>
 
-        <p className="text-center text-gray-600 mb-12">
-          Everything you need to conduct AI-powered interviews.
-        </p>
+        <p className="text-center text-lg text-gray-600 max-w-3xl mx-auto mb-14">
+  Experience next-generation AI interviews with resume analysis,
+  voice interaction, live monitoring, intelligent evaluation,
+  and comprehensive performance reports.
+</p>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
 
           {features.map((feature, index) => (
             <div
               key={index}
-              className="bg-white rounded-xl shadow-lg p-8 hover:shadow-2xl hover:-translate-y-2 transition-all duration-300"
+              className="bg-white rounded-2xl shadow-md border border-gray-200 p-8 hover:shadow-2xl hover:-translate-y-3 hover:border-blue-500 transition-all duration-300"
             >
-              <div className="mb-5">
+              <div className="flex justify-center mb-6">
                 {feature.icon}
               </div>
 
-              <h3 className="text-xl font-bold mb-3">
+              <h3 className="text-xl font-bold text-center mb-3">
                 {feature.title}
               </h3>
 
-              <p className="text-gray-600">
+              <p className="text-gray-600 text-center leading-7">
                 {feature.description}
               </p>
             </div>

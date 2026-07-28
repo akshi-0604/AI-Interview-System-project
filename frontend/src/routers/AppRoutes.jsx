@@ -10,6 +10,7 @@ import Interview from "../pages/candidate/Interview";
 import Result from "../pages/candidate/Result";
 import AdminDashboard from "../pages/admin/Dashboard";
 import InterviewDetails from "../pages/admin/InterviewDetails";
+import ForgotPassword from "../pages/candidate/ForgotPassword";
 
 
 function AppRoutes() {
@@ -59,6 +60,11 @@ function AppRoutes() {
       <Route
         path="/admin/interview/:id"
         element={<InterviewDetails />}
+      />
+
+      <Route
+        path="/forgot-password"
+        element={<ForgotPassword />}
       />
 
     </Routes>
