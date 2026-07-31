@@ -2,7 +2,8 @@ import User from "../models/User.js";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import crypto from "crypto";
-import transporter from "../config/email.js";
+import sendEmail from "../config/email.js";
+
 
 // Register User
 export const registerUser = async (req, res) => {
@@ -152,52 +153,40 @@ export const forgotPassword = async (req, res) => {
     const resetURL = `${process.env.FRONTEND_URL}/reset-password/${resetToken}`;
 
     // Send Email
-    await transporter.sendMail({
-      from: process.env.EMAIL_USER,
-      to: user.email,
+    console.log("Before sendMail");
+
+    const response = await sendEmail({
+      sender: {
+        name: "AI Interview System",
+        email: process.env.EMAIL_USER,
+      },
+      to: [
+        {
+          email: user.email,
+          name: user.fullName,
+        },
+      ],
       subject: "AI Interview System - Password Reset",
-      html: `
-        <div style="font-family: Arial, sans-serif; padding:20px;">
-          <h2>Password Reset Request</h2>
+      htmlContent: `
+  <div style="font-family:Arial,sans-serif;padding:20px;">
+    <h2>Password Reset Request</h2>
 
-          <p>Hello <b>${user.fullName}</b>,</p>
+    <p>Hello <b>${user.fullName}</b>,</p>
 
-          <p>We received a request to reset your password.</p>
+    <p>Click the button below to reset your password.</p>
 
-          <p>
-            Click the button below to reset your password:
-          </p>
+    <a href="${resetURL}"
+    style="background:#2563eb;color:white;padding:12px 20px;text-decoration:none;border-radius:6px;">
+      Reset Password
+    </a>
 
-          <a
-            href="${resetURL}"
-            style="
-              background:#2563eb;
-              color:white;
-              padding:12px 20px;
-              text-decoration:none;
-              border-radius:6px;
-              display:inline-block;
-            "
-          >
-            Reset Password
-          </a>
-
-          <p style="margin-top:20px;">
-            This link is valid for <b>1 hour</b>.
-          </p>
-
-          <p>
-            If you did not request a password reset, please ignore this email.
-          </p>
-
-          <br/>
-
-          <p>Regards,</p>
-
-          <h3>AI Interview System Team</h3>
-        </div>
-      `,
+    <p>This link expires in 1 hour.</p>
+  </div>
+  `,
     });
+
+    console.log("After sendMail");
+    console.log(response.data);
 
     return res.status(200).json({
       success: true,
@@ -213,3 +202,61 @@ export const forgotPassword = async (req, res) => {
     });
   }
 };
+
+
+
+
+export const resetPassword = async (req, res) => {
+  try {
+    const { token, password } = req.body;
+
+    // Check required fields
+    if (!token || !password) {
+      return res.status(400).json({
+        success: false,
+        message: "Token and password are required.",
+      });
+    }
+
+    // Find user with valid token
+    const user = await User.findOne({
+      resetPasswordToken: token,
+      resetPasswordExpires: { $gt: Date.now() },
+    });
+
+    // Check token
+    if (!user) {
+      return res.status(400).json({
+        success: false,
+        message: "Invalid or expired reset token.",
+      });
+    }
+
+    // Hash new password
+    const hashedPassword = await bcrypt.hash(password, 10);
+
+    // Update password
+    user.password = hashedPassword;
+
+    // Remove reset token
+    user.resetPasswordToken = undefined;
+    user.resetPasswordExpires = undefined;
+
+    // Save user
+    await user.save();
+
+    return res.status(200).json({
+      success: true,
+      message: "Password reset successful.",
+    });
+
+  } catch (error) {
+    console.error("Reset Password Error:", error);
+
+    return res.status(500).json({
+      success: false,
+      message: "Internal Server Error.",
+    });
+  }
+};
+

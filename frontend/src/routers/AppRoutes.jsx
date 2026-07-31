@@ -8,9 +8,11 @@ import Dashboard from "../pages/candidate/Dashboard.jsx";
 import ResumeUpload from "../pages/candidate/ResumeUpload.jsx";
 import Interview from "../pages/candidate/Interview";
 import Result from "../pages/candidate/Result";
-import AdminDashboard from "../pages/admin/Dashboard";
-import InterviewDetails from "../pages/admin/InterviewDetails";
+import AdminDashboard from "../pages/admin/Dashboard.jsx";
+import InterviewDetails from "../pages/admin/InterviewDetails.jsx";
 import ForgotPassword from "../pages/candidate/ForgotPassword";
+import ResetPassword from "../pages/candidate/ResetPassword";
+import AdminLogin from "../pages/admin/Login.jsx";
 
 
 function AppRoutes() {
@@ -65,6 +67,16 @@ function AppRoutes() {
       <Route
         path="/forgot-password"
         element={<ForgotPassword />}
+      />
+
+      <Route
+        path="/reset-password/:token"
+        element={<ResetPassword />}
+      />
+
+      <Route
+        path="/admin/login"
+        element={<AdminLogin />}
       />
 
     </Routes>

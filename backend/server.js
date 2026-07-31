@@ -11,6 +11,7 @@ import followupRoutes from "./routes/followupRoutes.js";
 
 
 dotenv.config();
+console.log("EMAIL_USER:", process.env.EMAIL_USER);
 
 // Connect to MongoDB
 connectDB();

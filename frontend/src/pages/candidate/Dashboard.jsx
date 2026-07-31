@@ -1,11 +1,13 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import API from "../../services/api";
+
 import Sidebar from "../../components/candidate/Sidebar";
 import Topbar from "../../components/candidate/Topbar";
 import DashboardCard from "../../components/candidate/DashboardCard";
 import RecentInterView from "../../components/candidate/RecentInterView";
 import ResumeUpload from "../../components/candidate/ResumeUpload";
-
+import StartInterview from "../../components/candidate/StartInterview";
 
 import {
   FileText,
@@ -13,52 +15,72 @@ import {
   Clock,
   BarChart3,
 } from "lucide-react";
-import StartInterview from "../../components/candidate/StartInterview";
 
 function Dashboard() {
+  const navigate = useNavigate();
+
   const [stats, setStats] = useState({
-  total: 0,
-  average: 0,
-  best: 0,
-  latest: 0,
-});
+    total: 0,
+    average: 0,
+    best: 0,
+    latest: 0,
+  });
 
-useEffect(() => {
-  fetchDashboardStats();
-}, []);
+  // Protect Dashboard
+  useEffect(() => {
+    const token = localStorage.getItem("token");
 
-const fetchDashboardStats = async () => {
-  try {
-    const res = await API.get("/interview");
+    if (!token) {
+      navigate("/login");
+    }
+  }, [navigate]);
 
-    const interviews = res.data;
+  // Load Dashboard Data
+  useEffect(() => {
+    fetchDashboardStats();
+  }, []);
 
-    if (interviews.length === 0) return;
+  const fetchDashboardStats = async () => {
+    try {
+      const res = await API.get("/interview");
 
-    const total = interviews.length;
+      const interviews = res.data;
 
-    const scores = interviews.map((item) => item.score);
+      if (interviews.length === 0) return;
 
-    const average = (
-      scores.reduce((a, b) => a + b, 0) / total
-    ).toFixed(0);
+      const total = interviews.length;
 
-    const best = Math.max(...scores);
+      const scores = interviews.map((item) => item.score);
 
-    const latest = interviews[interviews.length - 1].score;
+      const average = (
+        scores.reduce((a, b) => a + b, 0) / total
+      ).toFixed(0);
 
-    setStats({
-      total,
-      average,
-      best,
-      latest,
-    });
+      const best = Math.max(...scores);
 
-  } catch (error) {
-    console.log(error);
-  }
-};
+      const latest = interviews[interviews.length - 1].score;
 
+      setStats({
+        total,
+        average,
+        best,
+        latest,
+      });
+
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  // Logout
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    localStorage.removeItem("userId");
+
+    alert("Logged out successfully.");
+
+    navigate("/");
+  };
 
   return (
     <div className="flex flex-col lg:flex-row">
@@ -71,9 +93,24 @@ const fetchDashboardStats = async () => {
 
         <div className="p-4 lg:p-8">
 
-          <h1 className="text-2xl lg:text-3xl font-bold mb-6">
-            Dashboard
-          </h1>
+          {/* Dashboard Heading */}
+
+          <div className="flex justify-between items-center mb-6">
+
+            <h1 className="text-2xl lg:text-3xl font-bold">
+              Dashboard
+            </h1>
+
+            <button
+              onClick={handleLogout}
+              className="bg-red-600 hover:bg-red-700 text-white px-5 py-2 rounded-lg transition"
+            >
+              Logout
+            </button>
+
+          </div>
+
+          {/* Dashboard Cards */}
 
           <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4 lg:gap-6">
 
@@ -100,23 +137,24 @@ const fetchDashboardStats = async () => {
 
             <DashboardCard
               title="Best Score"
-              value={`${stats.best}`}
+              value={`${stats.best}%`}
               icon={<Trophy size={28} />}
               color="bg-purple-600"
             />
 
           </div>
-          <RecentInterView/>
-          <ResumeUpload/>
-          <StartInterview/>
+
+          <RecentInterView />
+
+          <ResumeUpload />
+
+          <StartInterview />
 
         </div>
 
       </div>
 
     </div>
-
-
   );
 }
 

@@ -1,7 +1,7 @@
 import InterviewHistory from "../../components/admin/InterviewHistory";
 import AdminStats from "../../components/admin/AdminStats";
 
-function Dashboard() {
+function AdminDashboard() {
     return (
         <div className="min-h-screen bg-gray-100 p-8">
 
@@ -16,4 +16,4 @@ function Dashboard() {
     );
 }
 
-export default Dashboard;
+export default AdminDashboard;

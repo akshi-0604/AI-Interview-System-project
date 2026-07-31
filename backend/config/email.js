@@ -1,11 +1,17 @@
-import nodemailer from "nodemailer";
+import axios from "axios";
 
-const transporter = nodemailer.createTransport({
-  service: "gmail",
-  auth: {
-    user: process.env.EMAIL_USER,
-    pass: process.env.EMAIL_PASS,
-  },
-});
+const sendEmail = async (emailData) => {
+  return axios.post(
+    "https://api.brevo.com/v3/smtp/email",
+    emailData,
+    {
+      headers: {
+        "api-key": process.env.BREVO_API_KEY,
+        "Content-Type": "application/json",
+        "Accept": "application/json",
+      },
+    }
+  );
+};
 
-export default transporter;
+export default sendEmail;

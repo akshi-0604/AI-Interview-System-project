@@ -33,18 +33,19 @@ const userSchema = new mongoose.Schema(
     },
 
     interviewScore: {
-  type: Number,
-  default: 0,
-},
+      type: Number,
+      default: 0,
+    },
 
-resetPasswordToken: {
-  type: String,
-  default: "",
-},
+    resetPasswordToken: {
+      type: String,
+      default: "",
+    },
 
-resetPasswordExpires: {
-  type: Date,
-},
+    resetPasswordExpires: {
+      type: Date,
+    },
+
   },
   {
     timestamps: true,
