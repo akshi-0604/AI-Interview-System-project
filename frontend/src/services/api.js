@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const API = axios.create({
-  baseURL: "http://localhost:5000/api",
+  baseURL: "https://ai-interview-system-project.onrender.com/api",
 });
 
 API.interceptors.request.use(
@@ -19,3 +19,4 @@ API.interceptors.request.use(
 
 export default API;
 // https://ai-interview-system-project.onrender.com/api
+// http://localhost:5000/api
