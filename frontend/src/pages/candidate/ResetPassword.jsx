@@ -18,7 +18,8 @@ function ResetPassword() {
     }
 
     try {
-      const res = await API.post(`/auth/reset-password/${token}`, {
+      const res = await API.post("/auth/reset-password", {
+        token,
         password,
       });
 
