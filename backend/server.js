@@ -23,7 +23,7 @@ app.use(
   cors({
     origin: [
       "http://localhost:5173",
-      "https://ai-interview-system-project.vercel.app",
+      "https://ai-interview-system-project-5zt9-black.vercel.app",
     ],
     credentials: true,
   })
@@ -50,3 +50,4 @@ const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
   console.log(` Server is running on port ${PORT}`);
 });
+// https://ai-interview-system-project.vercel.app
