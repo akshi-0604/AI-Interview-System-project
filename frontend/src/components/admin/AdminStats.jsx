@@ -15,7 +15,7 @@ function AdminStats() {
 
   const fetchStats = async () => {
     try {
-      const res = await API.get("/interview");
+      const res = await API.get("/interview/results");
 
       const interviews = res.data;
 

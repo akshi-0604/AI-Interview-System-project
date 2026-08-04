@@ -11,7 +11,7 @@ function InterviewHistory() {
 
     const fetchInterviews = async () => {
         try {
-            const res = await API.get("/interview");
+            const res = await API.get("/interview/results");
             setInterviews(res.data);
         } catch (error) {
             console.log(error);
@@ -93,6 +93,7 @@ function InterviewHistory() {
                                 <td>
                                     {new Date(item.createdAt).toLocaleDateString()}
                                 </td>
+                                
 
                                 <td>
                                     <Link
