@@ -56,6 +56,16 @@ const interviewResultSchema = new mongoose.Schema(
       required: true,
     },
 
+    attemptedQuestions: {
+      type: Number,
+      default: 0,
+    },
+
+    unattemptedQuestions: {
+      type: Number,
+      default: 0,
+    },
+
     // Proctoring Violations
     noFaceViolations: {
       type: Number,

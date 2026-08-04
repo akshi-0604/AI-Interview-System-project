@@ -6,5 +6,5 @@ export const evaluateAnswer = async (question, answer) => {
     answer,
   });
 
-  return response.data;
+  return response.data.result;
 };
