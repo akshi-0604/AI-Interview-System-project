@@ -2,8 +2,9 @@ import express from "express";
 import {
   registerUser,
   loginUser,
+  googleLogin,
   forgotPassword,
-  resetPassword
+  resetPassword,
 } from "../controllers/authController.js";
 
 const router = express.Router();
@@ -13,6 +14,8 @@ router.post("/register", registerUser);
 
 // Login
 router.post("/login", loginUser);
+
+router.post("/google", googleLogin);
 
 // Forgot Password
 router.post("/forgot-password", forgotPassword);
