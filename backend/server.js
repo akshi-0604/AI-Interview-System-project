@@ -41,7 +41,47 @@ app.use(helmet());
 
 app.use(
   helmet.crossOriginOpenerPolicy({
-    policy: "same-origin",
+    policy: "same-origin-allow-popups",
+  })
+);
+
+app.use(
+  helmet.frameguard({
+    action: "sameorigin",
+  })
+);
+
+app.use(
+  helmet.contentSecurityPolicy({
+    directives: {
+      defaultSrc: ["'self'"],
+
+      scriptSrc: [
+        "'self'",
+        "https://accounts.google.com",
+      ],
+
+      styleSrc: [
+        "'self'",
+        "'unsafe-inline'",
+      ],
+
+      imgSrc: [
+        "'self'",
+        "data:",
+        "https:",
+      ],
+
+      connectSrc: [
+        "'self'",
+        process.env.FRONTEND_URL,
+        "https://accounts.google.com",
+      ],
+
+      frameSrc: [
+        "https://accounts.google.com",
+      ],
+    },
   })
 );
 
