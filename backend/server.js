@@ -8,6 +8,7 @@ import questionRoutes from "./routes/questionRoutes.js";
 import interviewRoutes from "./routes/interviewRoutes.js";
 import evaluationRoutes from "./routes/evaluationRoutes.js";
 import followupRoutes from "./routes/followupRoutes.js";
+import helmet from "helmet";
 
 
 dotenv.config();
@@ -36,6 +37,13 @@ app.use("/api/questions", questionRoutes);
 app.use("/api/interview", interviewRoutes);
 app.use("/api/evaluate",evaluationRoutes);
 app.use("/api/followup", followupRoutes);
+app.use(helmet());
+
+app.use(
+  helmet.crossOriginOpenerPolicy({
+    policy: "same-origin",
+  })
+);
 
 
 // Test Route

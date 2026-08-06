@@ -26,7 +26,7 @@ function Hero() {
         </h1>
 
         
-        <p className="mt-8 text-lg md:text-xl text-gray-200 max-w-3xl mx-auto leading-8">
+        <p className="mt-8 text-lg md:text-xl text-gray-700 max-w-3xl mx-auto leading-8">
           Practice resume-based AI interviews with voice interaction,
           intelligent follow-up questions, instant evaluation,
           and detailed performance reports.

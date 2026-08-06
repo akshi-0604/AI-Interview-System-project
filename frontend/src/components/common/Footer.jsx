@@ -20,7 +20,7 @@ function Footer() {
               AI Interview System
             </h2>
 
-            <p className="text-gray-400 leading-7">
+            <p className="text-gray-700 leading-7">
               Practice AI interviews, improve your confidence,
               and prepare for your dream job with intelligent
               resume-based interview simulations.
@@ -34,7 +34,7 @@ function Footer() {
               Quick Links
             </h3>
 
-            <ul className="space-y-3 text-gray-400">
+            <ul className="space-y-3 text-gray-700">
 
               <li>
                 <a href="#home" className="hover:text-white">
@@ -95,7 +95,7 @@ function Footer() {
 
         <hr className="border-gray-700 my-10" />
 
-        <p className="text-center text-gray-500">
+        <p className="text-center text-gray-700">
           © 2026 AI Interview System. All Rights Reserved.
         </p>
 
