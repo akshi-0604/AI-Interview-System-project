@@ -1,25 +1,28 @@
 import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
+import helmet from "helmet";
+
 import connectDB from "./config/db.js";
+
 import authRoutes from "./routes/authRoutes.js";
 import resumeRoutes from "./routes/resumeRoutes.js";
 import questionRoutes from "./routes/questionRoutes.js";
 import interviewRoutes from "./routes/interviewRoutes.js";
 import evaluationRoutes from "./routes/evaluationRoutes.js";
 import followupRoutes from "./routes/followupRoutes.js";
-import helmet from "helmet";
-
 
 dotenv.config();
-console.log("EMAIL_USER:", process.env.EMAIL_USER);
 
-// Connect to MongoDB
+// Connect MongoDB
 connectDB();
 
 const app = express();
 
-// Middleware
+
+// CORS
+
+
 const allowedOrigins = [
   "http://localhost:5173",
   "https://ai-interview-system-project-5zt9-black.vercel.app",
@@ -28,16 +31,30 @@ const allowedOrigins = [
 
 app.use(
   cors({
-    origin(origin, callback) {
-      if (!origin || allowedOrigins.includes(origin)) {
-        callback(null, true);
-      } else {
-        callback(new Error("Not allowed by CORS"));
+    origin: function (origin, callback) {
+
+      // Allow Postman, mobile apps, server-to-server
+      if (!origin) {
+        return callback(null, true);
       }
+
+      if (allowedOrigins.includes(origin)) {
+        return callback(null, true);
+      }
+
+      console.log("Blocked Origin:", origin);
+
+      return callback(new Error("Not allowed by CORS"));
     },
+
     credentials: true,
   })
 );
+
+
+// Middleware
+
+
 app.use(express.json());
 
 app.use(helmet());
@@ -54,40 +71,6 @@ app.use(
   })
 );
 
-// app.use(
-//   helmet.contentSecurityPolicy({
-//     directives: {
-//       defaultSrc: ["'self'"],
-
-//       scriptSrc: [
-//         "'self'",
-//         "https://accounts.google.com",
-//       ],
-
-//       styleSrc: [
-//         "'self'",
-//         "'unsafe-inline'",
-//       ],
-
-//       imgSrc: [
-//         "'self'",
-//         "data:",
-//         "https:",
-//       ],
-
-//       connectSrc: [
-//         "'self'",
-//         process.env.FRONTEND_URL,
-//         "https://accounts.google.com",
-//         "https://ai-interview-system-project.onrender.com",
-//       ],
-
-//       frameSrc: [
-//         "https://accounts.google.com",
-//       ],
-//     },
-//   })
-// );
 
 app.use("/api/auth", authRoutes);
 app.use("/api/resume", resumeRoutes);
@@ -97,15 +80,14 @@ app.use("/api/evaluate", evaluationRoutes);
 app.use("/api/followup", followupRoutes);
 
 
-// Test Route
+
 app.get("/", (req, res) => {
-  res.send(" AI Interview Backend Server is Running...");
+  res.send("AI Interview Backend Server is Running...");
 });
 
-// Port
+
 const PORT = process.env.PORT || 5000;
 
-// Start Server
 app.listen(PORT, () => {
-  console.log(` Server is running on port ${PORT}`);
+  console.log(`Server is running on port ${PORT}`);
 });
