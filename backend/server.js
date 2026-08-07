@@ -25,7 +25,14 @@ const app = express();
 
 const allowedOrigins = [
   "http://localhost:5173",
+
+  // Production domain
+  "https://ai-interview-system-project.vercel.app",
+
+  // Previous deployment
   "https://ai-interview-system-project-5zt9-black.vercel.app",
+
+  // Preview deployment
   "https://ai-interview-system-project-pkl1d3ark-akshitha-1747s-projects.vercel.app",
 ];
 
