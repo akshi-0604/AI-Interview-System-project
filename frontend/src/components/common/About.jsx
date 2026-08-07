@@ -4,15 +4,15 @@ function About() {
   return (
     <section
       id="about"
-      className="py-24 bg-white"
+      className="py-24  bg-white dark:bg-gray-900"
     >
       <div className="max-w-7xl mx-auto px-6">
 
-        <h2 className="text-5xl font-bold text-center text-gray-800 mb-5">
+        <h2 className="text-5xl font-bold text-center text-gray-800  dark:text-gray-100 mb-5">
           About Our Platform
         </h2>
 
-        <p className="text-center text-lg text-gray-600 max-w-4xl mx-auto mb-16 leading-8">
+        <p className="text-center text-lg text-gray-600 dark:text-gray-300 max-w-4xl mx-auto mb-16 leading-8">
           AI Interview System is an intelligent recruitment platform that
           helps candidates practice interviews while enabling organizations
           to evaluate technical and HR skills through AI-powered assessments,
@@ -27,7 +27,7 @@ function About() {
               AI Powered
             </h3>
 
-            <p className="text-gray-600 leading-7">
+            <p className="text-gray-600  dark:text-gray-300 leading-7">
               Intelligent interview questions generated dynamically based on
               candidate resumes and previous answers.
             </p>
@@ -39,7 +39,7 @@ function About() {
               Secure Proctoring
             </h3>
 
-            <p className="text-gray-600 leading-7">
+            <p className="text-gray-600  dark:text-gray-300 leading-7">
               Live monitoring with face detection, mobile detection,
               fullscreen tracking and voice anomaly detection.
             </p>
@@ -51,7 +51,7 @@ function About() {
               Career Ready
             </h3>
 
-            <p className="text-gray-600 leading-7">
+            <p className="text-gray-600  dark:text-gray-300 leading-7">
               Practice interviews, receive AI feedback,
               improve confidence and prepare for real company interviews.
             </p>

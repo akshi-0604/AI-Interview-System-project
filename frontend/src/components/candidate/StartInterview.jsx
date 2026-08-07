@@ -9,7 +9,7 @@ function StartInterview() {
   };
 
   return (
-    <div className="bg-white rounded-xl shadow-md p-6 mt-8">
+    <div className="bg-white dark:bg-gray-900 rounded-xl shadow-md p-6 mt-8">
       <h2 className="text-2xl font-semibold mb-4">
         Ready for Interview?
       </h2>
@@ -17,7 +17,7 @@ function StartInterview() {
       <button
         type="button"
         onClick={handleStart}
-        className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg cursor-pointer"
+        className="bg-blue-600 hover:bg-blue-700 text-white  px-6 py-3 rounded-lg cursor-pointer"
       >
         Start Interview
       </button>

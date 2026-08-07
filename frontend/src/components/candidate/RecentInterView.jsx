@@ -24,7 +24,7 @@ function RecentInterView() {
 };
 
   return (
-    <div className="bg-white rounded-xl shadow-md p-6 mt-8">
+    <div className="bg-white dark:bg-gray-900 rounded-xl shadow-md p-6 mt-8">
 
       <h2 className="text-2xl font-semibold mb-6">
         Recent Interviews

@@ -1,11 +1,14 @@
 import { Link, useNavigate } from "react-router-dom";
 import Button from "./Button";
+import { useContext } from "react";
+import { ThemeContext } from "../../context/ThemeContext";
 
 function Navbar() {
   const navigate = useNavigate();
+  const { theme, setTheme } = useContext(ThemeContext);
 
   return (
-    <nav className="bg-white shadow-md sticky top-0 z-50">
+    <nav className="bg-white dark:bg-gray-900 shadow-md sticky top-0 z-50">
       <div className="max-w-7xl mx-auto flex justify-between items-center px-8 py-4">
 
         {/* Logo */}
@@ -17,7 +20,7 @@ function Navbar() {
         </Link>
 
         {/* Navigation */}
-        <ul className="hidden md:flex gap-8 font-medium text-gray-700">
+        <ul className="hidden md:flex gap-8 font-medium text-gray-800 dark:text-white">
 
           <li>
             <a href="#home" className="hover:text-blue-700 transition">
@@ -46,7 +49,18 @@ function Navbar() {
         </ul>
 
         {/* Buttons */}
+
         <div className="flex gap-3">
+
+          <select
+            value={theme}
+            onChange={(e) => setTheme(e.target.value)}
+            className="border rounded-lg px-3 py-2"
+          >
+            <option value="light">Light</option>
+            <option value="dark">Dark</option>
+            <option value="blue">Blue</option>
+          </select>
 
           <Button
             text="Candidate Login"

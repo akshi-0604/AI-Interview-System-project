@@ -48,13 +48,13 @@ function ResumeUpload() {
   };
 
   return (
-    <div className="bg-white rounded-xl shadow-md p-8 mt-8">
+    <div className="bg-white dark:bg-gray-900 rounded-xl shadow-md p-8 mt-8">
 
       <h2 className="text-2xl font-bold mb-2">
         Upload Resume
       </h2>
 
-      <p className="text-gray-500 mb-6">
+      <p className="text-gray-500  dark:text-gray-400 mb-6">
         Upload your latest resume before attending the interview.
       </p>
 
@@ -62,7 +62,7 @@ function ResumeUpload() {
 
         <Upload
           size={55}
-          className="text-blue-600 mb-4"
+          className="text-blue-600  dark:text-blue-300 mb-4"
         />
 
         <span className="bg-blue-600 text-white px-5 py-3 rounded-lg">
@@ -86,7 +86,7 @@ function ResumeUpload() {
 
             <FileText className="mr-2 text-green-600" />
 
-            <span className="text-gray-700">
+            <span className="text-gray-700 dark:text-gray-200">
               {resume.name}
             </span>
 
@@ -101,8 +101,8 @@ function ResumeUpload() {
         disabled={loading}
         className={`mt-6 w-full py-3 rounded-lg text-white transition
 ${loading
-            ? "bg-gray-400 cursor-not-allowed"
-            : "bg-blue-600 hover:bg-blue-700"
+            ? "bg-gray-400   cursor-not-allowed"
+            : "bg-blue-600  hover:bg-blue-700"
           }`}
       >
 
@@ -119,7 +119,7 @@ ${loading
 
       {message && (
 
-        <div className="mt-5 bg-green-100 border border-green-300 rounded-lg p-3 flex items-center text-green-700">
+        <div className="mt-5 bg-green-100  border border-green-300 rounded-lg p-3 flex items-center text-green-700 ">
 
           <CheckCircle className="mr-2" />
 

@@ -9,7 +9,7 @@ function Features() {
         "Adaptive AI asks technical and HR questions based on the candidate's resume and previous answers.",
     },
     {
-      icon: <FaFileAlt size={40} className="text-green-600" />,
+      icon: <FaFileAlt size={40} className="text-green-600 " />,
       title: "Resume Analysis",
       description:
         "Automatically extracts candidate skills, education, experience, and generates interview questions.",
@@ -31,15 +31,15 @@ function Features() {
   return (
     <section
   id="features"
-  className="py-20 bg-gray-100"
+  className="py-20 bg-gray-100 dark:bg-gray-800 "
 >
       <div className="max-w-7xl mx-auto px-6">
 
-        <h2 className="text-5xl font-bold text-center text-gray-800 mb-4">
+        <h2 className="text-5xl font-bold text-center text-gray-800 dark:text-gray-100 mb-4">
   Why Choose Our Platform?
 </h2>
 
-        <p className="text-center text-lg text-gray-600 max-w-3xl mx-auto mb-14">
+        <p className="text-center text-lg text-gray-600  dark:text-gray-300 max-w-3xl mx-auto mb-14">
   Experience next-generation AI interviews with resume analysis,
   voice interaction, live monitoring, intelligent evaluation,
   and comprehensive performance reports.
@@ -50,7 +50,7 @@ function Features() {
           {features.map((feature, index) => (
             <div
               key={index}
-              className="bg-white rounded-2xl shadow-md border border-gray-200 p-8 hover:shadow-2xl hover:-translate-y-3 hover:border-blue-500 transition-all duration-300"
+              className="bg-white dark:bg-gray-900  rounded-2xl shadow-md border border-gray-200 p-8 hover:shadow-2xl hover:-translate-y-3 hover:border-blue-500 transition-all duration-300"
             >
               <div className="flex justify-center mb-6">
                 {feature.icon}
@@ -60,7 +60,7 @@ function Features() {
                 {feature.title}
               </h3>
 
-              <p className="text-gray-600 text-center leading-7">
+              <p className="text-gray-600  dark:text-gray-300 text-center leading-7">
                 {feature.description}
               </p>
             </div>
