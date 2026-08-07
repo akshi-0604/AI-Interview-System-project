@@ -54,39 +54,40 @@ app.use(
   })
 );
 
-app.use(
-  helmet.contentSecurityPolicy({
-    directives: {
-      defaultSrc: ["'self'"],
+// app.use(
+//   helmet.contentSecurityPolicy({
+//     directives: {
+//       defaultSrc: ["'self'"],
 
-      scriptSrc: [
-        "'self'",
-        "https://accounts.google.com",
-      ],
+//       scriptSrc: [
+//         "'self'",
+//         "https://accounts.google.com",
+//       ],
 
-      styleSrc: [
-        "'self'",
-        "'unsafe-inline'",
-      ],
+//       styleSrc: [
+//         "'self'",
+//         "'unsafe-inline'",
+//       ],
 
-      imgSrc: [
-        "'self'",
-        "data:",
-        "https:",
-      ],
+//       imgSrc: [
+//         "'self'",
+//         "data:",
+//         "https:",
+//       ],
 
-      connectSrc: [
-        "'self'",
-        process.env.FRONTEND_URL,
-        "https://accounts.google.com",
-      ],
+//       connectSrc: [
+//         "'self'",
+//         process.env.FRONTEND_URL,
+//         "https://accounts.google.com",
+//         "https://ai-interview-system-project.onrender.com",
+//       ],
 
-      frameSrc: [
-        "https://accounts.google.com",
-      ],
-    },
-  })
-);
+//       frameSrc: [
+//         "https://accounts.google.com",
+//       ],
+//     },
+//   })
+// );
 
 app.use("/api/auth", authRoutes);
 app.use("/api/resume", resumeRoutes);
