@@ -83,11 +83,11 @@ function Dashboard() {
   };
 
   return (
-    <div className="flex flex-col lg:flex-row">
+    <div className="flex flex-col lg:flex-row bg-gray-100 dark:bg-gray-900">
 
       <Sidebar />
 
-      <div className="flex-1 bg-gray-100 min-h-screen">
+      <div className="flex-1 ml-64 bg-gray-100 dark:bg-gray-900 min-h-screen overflow-y-auto transition-colors duration-300">
 
         <Topbar />
 
@@ -97,7 +97,7 @@ function Dashboard() {
 
           <div className="flex justify-between items-center mb-6">
 
-            <h1 className="text-2xl lg:text-3xl font-bold">
+            <h1 className="text-2xl lg:text-3xl font-bold text-gray-900 dark:text-white">
               Dashboard
             </h1>
 

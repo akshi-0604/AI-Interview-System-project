@@ -37,15 +37,18 @@ function Sidebar() {
       {/* Sidebar */}
       <div
         className={`
-          fixed lg:static top-0 left-0
-          w-64 h-screen
-          bg-gray-900 text-white
-          p-6
-          z-40
-          transform transition-transform duration-300
-          ${open ? "translate-x-0" : "-translate-x-full"}
-          lg:translate-x-0
-        `}
+    fixed top-0 left-0
+    w-64 h-screen
+   bg-white dark:bg-gray-900
+text-gray-800 dark:text-white
+border-r border-gray-200 dark:border-gray-700
+    p-6
+    z-40
+    overflow-y-auto
+    transform transition-transform duration-300
+    ${open ? "translate-x-0" : "-translate-x-full"}
+    lg:translate-x-0
+  `}
       >
         <h1 className="text-2xl font-bold mb-10">
           AI Interview
@@ -56,7 +59,7 @@ function Sidebar() {
           <Link
             to="/candidate/dashboard"
             onClick={() => setOpen(false)}
-            className="flex items-center gap-3 p-3 rounded-lg hover:bg-slate-800"
+            className="flex items-center gap-3 p-3 rounded-lghover:bg-gray-200 dark:hover:bg-slate-800"
           >
             <LayoutDashboard size={20} />
             <span>Dashboard</span>

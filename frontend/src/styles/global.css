@@ -1,20 +1,17 @@
 @import "tailwindcss";
 
-body{
-  transition:0.3s;
+@custom-variant dark (&:where(.dark, .dark *));
+
+body {
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-body.light{
-  background:#ffffff;
-  color:#111827;
+body.light {
+  background-color: #ffffff;
+  color: #111827;
 }
 
-body.dark{
-  background:#111827;
-  color:white;
-}
-
-body.blue{
-  background:#0f172a;
-  color:#60a5fa;
+body.dark {
+  background-color: #111827;
+  color: #ffffff;
 }

@@ -6,7 +6,7 @@ function Topbar() {
   const { theme, setTheme } = useContext(ThemeContext);
 
   return (
-    <div className="bg-white dark:bg-gray-900 shadow px-4 lg:px-8 py-4">
+    <div className="sticky top-0 z-40 bg-white dark:bg-gray-900 px-6 py-4 shadow-sm">
 
       <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
 
@@ -34,18 +34,27 @@ function Topbar() {
             <input
               type="text"
               placeholder="Search..."
-              className="bg-transparent outline-none ml-2 w-full"
+              className="bg-transparent outline-none ml-2 w-full text-gray-800 dark:text-white"
             />
           </div>
 
           <select
             value={theme}
             onChange={(e) => setTheme(e.target.value)}
-            className="border rounded-lg px-3 py-2"
+            className="
+    border
+    rounded-lg
+    px-3
+    py-2
+    bg-white
+    text-gray-800
+    dark:bg-gray-800
+    dark:text-white
+    dark:border-gray-600
+  "
           >
-            <option value="light">Light</option>
-            <option value="dark">Dark</option>
-            <option value="blue">Blue</option>
+            <option value="light"> Light</option>
+            <option value="dark"> Dark</option>
           </select>
 
           {/* Notification */}
@@ -53,7 +62,7 @@ function Topbar() {
             className="cursor-pointer text-gray-600 dark:text-gray-300 hover:text-blue-600"
             size={22}
           />
-          
+
           {/* Profile */}
           <div className="flex items-center gap-3">
 
@@ -64,7 +73,7 @@ function Topbar() {
             />
 
             <div>
-              <p className="font-semibold">
+              <p className="font-semibold text-gray-800 dark:text-white">
                 Candidate
               </p>
 

@@ -8,13 +8,13 @@ function Navbar() {
   const { theme, setTheme } = useContext(ThemeContext);
 
   return (
-    <nav className="bg-white dark:bg-gray-900 shadow-md sticky top-0 z-50">
+<nav className="bg-white dark:bg-gray-900 shadow-md transition-colors duration-300">
       <div className="max-w-7xl mx-auto flex justify-between items-center px-8 py-4">
 
         {/* Logo */}
         <Link
           to="/"
-          className="text-3xl font-bold text-blue-600"
+          className="text-3xl font-bold text-blue-600 dark:text-blue-400"
         >
           AI Interview System
         </Link>
@@ -51,15 +51,23 @@ function Navbar() {
         {/* Buttons */}
 
         <div className="flex gap-3">
-
           <select
             value={theme}
             onChange={(e) => setTheme(e.target.value)}
-            className="border rounded-lg px-3 py-2"
+            className="
+    border
+    rounded-lg
+    px-3
+    py-2
+    bg-white
+    text-gray-800
+    dark:bg-gray-800
+    dark:text-white
+    dark:border-gray-600
+  "
           >
             <option value="light">Light</option>
             <option value="dark">Dark</option>
-            <option value="blue">Blue</option>
           </select>
 
           <Button
