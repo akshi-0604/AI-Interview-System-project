@@ -20,23 +20,26 @@ connectDB();
 const app = express();
 
 // Middleware
+const allowedOrigins = [
+  "http://localhost:5173",
+  "https://ai-interview-system-project-5zt9-black.vercel.app",
+  "https://ai-interview-system-project-pkl1d3ark-akshitha-1747s-projects.vercel.app",
+];
+
 app.use(
   cors({
-    origin: [
-      "http://localhost:5173",
-      "https://ai-interview-system-project-5zt9-black.vercel.app",
-    ],
+    origin(origin, callback) {
+      if (!origin || allowedOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error("Not allowed by CORS"));
+      }
+    },
     credentials: true,
   })
 );
 app.use(express.json());
 
-app.use("/api/auth", authRoutes);
-app.use("/api/resume", resumeRoutes);
-app.use("/api/questions", questionRoutes);
-app.use("/api/interview", interviewRoutes);
-app.use("/api/evaluate",evaluationRoutes);
-app.use("/api/followup", followupRoutes);
 app.use(helmet());
 
 app.use(
@@ -85,6 +88,13 @@ app.use(
   })
 );
 
+app.use("/api/auth", authRoutes);
+app.use("/api/resume", resumeRoutes);
+app.use("/api/questions", questionRoutes);
+app.use("/api/interview", interviewRoutes);
+app.use("/api/evaluate", evaluationRoutes);
+app.use("/api/followup", followupRoutes);
+
 
 // Test Route
 app.get("/", (req, res) => {
@@ -98,4 +108,3 @@ const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
   console.log(` Server is running on port ${PORT}`);
 });
-// https://ai-interview-system-project.vercel.app
